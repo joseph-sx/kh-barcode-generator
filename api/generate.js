@@ -17,7 +17,8 @@ module.exports = (req, res) => {
     width:1,
     displayValue: false,
     fontSize: 15,
-    height: 25
+    height: 25,
+    margin:0
   });
   const svgText = xmlSerializer.serializeToString(svgNode);
   res.send(svgText);
