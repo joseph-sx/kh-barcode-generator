@@ -15,8 +15,9 @@ module.exports = (req, res) => {
   JsBarcode(svgNode, value, {
     xmlDocument: document,
     width:1,
+    displayValue: false,
     fontSize: 15,
-    height: 25,
+    height: 25
   });
   const svgText = xmlSerializer.serializeToString(svgNode);
   res.send(svgText);
