@@ -1,6 +1,5 @@
 const { DOMImplementation, XMLSerializer } = require('xmldom');
-import { inject } from '@vercel/analytics';
-inject();
+
 var JsBarcode = require('jsbarcode');
 
 module.exports = (req, res) => {
