@@ -1,8 +1,9 @@
 const { DOMImplementation, XMLSerializer } = require('xmldom');
-var JsBarcode = require('jsbarcode');
+const  JsBarcode = require('jsbarcode');
 
 module.exports = (req, res) => {
   const { barcode }  = req.query;
+  console.log(req.headers);
   if(new String(barcode).length <= 25){
     const xmlSerializer = new XMLSerializer();
     const document = new DOMImplementation().createDocument('http://www.w3.org/1999/xhtml', 'html', null);
