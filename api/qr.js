@@ -7,7 +7,6 @@ const {
     QRCodeCanvas,
     QRCodeText,
   } = require('@akamfoad/qrcode');
-const { Options } = require('discord.js');
 
 module.exports = (req, res) => {
 
