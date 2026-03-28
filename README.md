@@ -1,3 +1,6 @@
+# About the example
+this can generate a barcode to be scanned by 2d scanners, use it as ´´http://localhost:3000/api/generate?data=123456789012``
+
 # Angular
 
 This directory is a brief example of an [Angular](https://angular.io/) app that can be deployed to Vercel with zero configuration.
