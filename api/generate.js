@@ -1,4 +1,4 @@
-const { DOMImplementation, XMLSerializer } = require('xmldom');
+const { DOMImplementation, XMLSerializer } = require('@xmldom/xmldom');
 
 var JsBarcode = require('jsbarcode');
 

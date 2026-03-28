@@ -1,4 +1,3 @@
-// const { DOMImplementation, XMLSerializer } = require('xmldom');
 
 // var JsBarcode = require('jsbarcode');
 const {

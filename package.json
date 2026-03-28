@@ -18,11 +18,11 @@
     "@angular/platform-browser-dynamic": "^20.0.6",
     "@angular/router": "^20.0.6",
     "@vercel/analytics": "^1.0.1",
+    "@xmldom/xmldom": "^0.8.11",
     "jsbarcode": "^3.11.5",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "vercel": "^28.16.15",
-    "xmldom": "^0.6.0",
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
