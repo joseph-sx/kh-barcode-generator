@@ -1,35 +1,70 @@
 package handler
 
 import (
+	"image"
+	"image/color"
+	"image/draw"
 	"image/png"
+	"joseph-sx/kh-barcode-generator/utils"
 	"net/http"
+
+	"golang.org/x/image/font"
+	"golang.org/x/image/font/basicfont"
+	"golang.org/x/image/math/fixed"
 
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/code128"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	value := r.URL.Query().Get("v")
-	if value == "" {
-		w.Header().Set("Content-Type", "image/svg+xml")
-		svgError := `<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
-			<rect width="100%" height="100%" fill="#fee2e2"/>
-			<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#991b1b">NO VALUE PROVIDED</text>
-		</svg>`
+	rawV := r.URL.Query().Get("v")
+	cleanV := utils.SanitizeBarcodeValue(rawV)
 
-		w.WriteHeader(http.StatusOK) // Algunos navegadores fallan el render si es 400
-		w.Write([]byte(svgError))
+	if cleanV == "" {
+		width := 250
+		height := 80
+		img := image.NewRGBA(image.Rect(0, 0, width, height))
+
+		backgroundColor := color.RGBA{254, 226, 226, 255}
+
+		textColor := color.RGBA{153, 27, 27, 255}
+		draw.Draw(img, img.Bounds(), &image.Uniform{backgroundColor}, image.Point{}, draw.Src)
+		d := &font.Drawer{
+			Dst:  img,
+			Src:  &image.Uniform{textColor},
+			Face: basicfont.Face7x13,
+		}
+		text := "NO VALUE PROVIDED"
+		textWidth := d.MeasureString(text).Round()
+		textHeight := 13
+		x := (width / 2) - (textWidth / 2)
+		y := (height / 2) + (textHeight / 2) - 2
+		d.Dot = fixed.P(x, y)
+		d.DrawString(text)
+
+		// 7. Responder como PNG
+		w.Header().Set("Content-Type", "image/png")
+		w.WriteHeader(http.StatusOK)
+		png.Encode(w, img)
 		return
 	}
-	bc, err := code128.Encode(value)
+
+	bc, err := code128.Encode(cleanV)
+
 	if err != nil {
-		http.Error(w, "Error encoding", http.StatusInternalServerError)
+		http.Error(w, "Value not supported by barcode standard", http.StatusBadRequest)
 		return
 	}
-	scaledBC, _ := barcode.Scale(bc, 250, 80)
+	scaledBC, err := barcode.Scale(bc, 250, 80)
+	if err != nil || scaledBC == nil {
+		http.Error(w, "Failed to scale barcode", http.StatusInternalServerError)
+		return
+	}
 
 	w.Header().Set("Content-Type", "image/png")
 	w.Header().Set("Cache-Control", "public, max-age=31536000, s-maxage=31536000, immutable")
-
-	png.Encode(w, scaledBC)
+	err = png.Encode(w, scaledBC)
+	if err != nil {
+		http.Error(w, "Display error", http.StatusInternalServerError)
+	}
 }
