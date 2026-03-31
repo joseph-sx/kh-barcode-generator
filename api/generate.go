@@ -42,7 +42,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		d.Dot = fixed.P(x, y)
 		d.DrawString(text)
 
-		// 7. Responder como PNG
 		w.Header().Set("Content-Type", "image/png")
 		w.WriteHeader(http.StatusOK)
 		png.Encode(w, img)
