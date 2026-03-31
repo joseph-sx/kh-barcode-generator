@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Kraken Barcode API</title>
+    <style>
+        body { font-family: system-ui; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        code { background: #656565; padding: 2px 5px; border-radius: 4px; }
+        .endpoint { background: #2d3436; color: #dfe6e9; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        .preview { border: 1px solid #ddd; padding: 20px; text-align: center; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Kraken Barcode Generator</h1>
+    <p>Microservicio de alto rendimiento desarrollado en <strong>Go</strong>.</p>
+    
+    <h2>Uso</h2>
+    <p>Envía el valor deseado mediante el parámetro <code>v</code>:</p>
+    <div class="endpoint">
+        <code>GET /api/generate?v=TU_CODIGO_AQUI</code>
+    </div>
+
+    <h2>Ejemplo</h2>
+    <div class="preview">
+        <p>Código para: <code>KRAKEN-12345</code></p>
+        <img src="/api/generate?v=KRAKEN-12345" alt="Ejemplo de código de barras">
+    </div>
+</body>
+</html>

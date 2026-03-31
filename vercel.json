@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "cleanUrls": true,
+    "rewrites": [
+        {
+            "source": "/api",
+            "destination": "/api/index.go"
+        },
+        {
+            "source": "/api/generate",
+            "destination": "/api/generate.go"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/public/$1"
+        }
+    ]
+}
