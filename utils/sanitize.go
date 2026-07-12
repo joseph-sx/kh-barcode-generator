@@ -14,3 +14,14 @@ func SanitizeBarcodeValue(input string) string {
 	}
 	return sanitized
 }
+
+func SanitizeQRValue(input string) string {
+	const maxLength = 1000
+
+	value := []rune(strings.TrimSpace(input))
+	if len(value) > maxLength {
+		value = value[:maxLength]
+	}
+
+	return string(value)
+}
