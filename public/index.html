@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Wordpress Barcode API / krakenhub</title>
+    <title>Barcode &amp; QR API / krakenhub</title>
     <style>
         body { font-family: system-ui; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
         code { color: #ddd; background: #656565; padding: 2px 5px; border-radius: 4px; }
@@ -11,8 +11,8 @@
     </style>
 </head>
 <body>
-    <h1>WordPress Barcode Generator</h1>
-    <h2>Uso</h2>
+    <h1>Barcode &amp; QR Generator</h1>
+    <h2>Código de barras</h2>
     <p>Envía el valor deseado mediante el parámetro <code>v</code>:</p>
     <div class="endpoint">
         <code>GET /api/generate?v=TU_CODIGO_AQUI</code>
@@ -22,6 +22,17 @@
     <div class="preview">
         <p>Código para: <code>KRAKEN-12345</code></p>
         <img src="/api/generate?v=KRAKEN-12345" alt="Ejemplo de código de barras">
+    </div>
+
+    <h2>Código QR</h2>
+    <p>El QR acepta texto, URLs y caracteres Unicode mediante el mismo parámetro <code>v</code>:</p>
+    <div class="endpoint">
+        <code>GET /api/qr?v=https://krakenhub.net</code>
+    </div>
+
+    <div class="preview">
+        <p>QR para: <code>https://krakenhub.net</code></p>
+        <img src="/api/qr?v=https%3A%2F%2Fkrakenhub.net" alt="Ejemplo de código QR">
     </div>
 </body>
 </html>
