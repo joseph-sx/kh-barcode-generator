@@ -4,4 +4,4 @@ go 1.26
 
 require github.com/boombuler/barcode v1.1.0
 
-require golang.org/x/image v0.38.0
+require golang.org/x/image v0.41.0
